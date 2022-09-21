@@ -1,0 +1,13 @@
+{{ template "header.html"}}
+
+<div>
+    <!-- Loop over the list of videos -->
+    {{range .videos}}
+    <div>
+        <div>{{.URL}}</div>
+        <div>{{.Title}}</div>
+        <div>{{.Description}}</div>
+    </div>
+    {{end}}
+</div>
+{{template "footer.html"}}
