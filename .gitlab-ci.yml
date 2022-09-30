@@ -1,0 +1,30 @@
+stages:
+  - compile
+  - test
+  - deploy
+
+build:
+  stage: compile
+  image: golang:latest
+  script:
+    - go get -d -v
+    - go build -o bin/golang-gin-poc -v .
+
+test:
+  stages: test
+  image: golang:latest
+  script:
+    - go test service/*.go
+
+staging:
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get update -qy
+    - gem install dpl
+    - dpl --provider=heroku --app=pragmatic-video-app --api-key=$HEROKU_API_KEY
+  envionment:
+    name: Development
+    url: https://gin-video-app.herokuapp.com/
+  only:
+  - ci-cd

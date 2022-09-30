@@ -55,7 +55,9 @@ func main() {
 	
 		})
 	}
-	
+	server.POST("/login", func(ctx *gin.Context){
+		token := loginController.Login(ctx)
+	})
 	viewRoutes := server.Group("/view")
 	{
 		viewRoutes.GET("/videos",videoController.ShowAll)
@@ -65,3 +67,8 @@ func main() {
 	server.Run(":8080")
 
 }
+
+
+//steps in hosting heroku
+//-create Procfile
+//-Run cmd "go build -o bin/golang-gin-poc"
